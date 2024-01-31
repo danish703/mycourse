@@ -1,0 +1,322 @@
+{% extends "_base.html" %}
+{% block title %} {{title}} {% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center">
+       <div class="col-8">
+         {% for post in posts %}
+            {% if post.content_object.type == 'Heading' %}
+                <h2>{{post.content_object.title}}</h2>
+                <hr/>
+           {% elif post.content_object.type == 'subheading' %}
+              <div class="box">
+                <strong>{{post.content_object.sub_title}}</strong>
+                <button class="btn p-2" onclick="subheading('{{post.content_object.sub_title}}','{{post.content_object.id}}');">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                    </svg>
+                </button>
+                   <button class="btn p-2" onclick="deleteBox('{{post.content_object.id}}','subheading');">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                          <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                   </button>
+              </div>
+           {% elif post.content_object.type == 'content' %}
+            <div class="box">
+               <p>{{post.content_object.content}}</p>
+                <button class="btn p-2" onclick="content('{{post.content_object.content}}','{{post.content_object.id}}');">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                    </svg>
+                </button>
+                   <button class="btn p-2" onclick="deleteBox('{{post.content_object.id}}','content');">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                          <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                   </button>
+             </div>
+           {% elif post.content_object.type == 'code' %}
+           <div class="box">
+               <pre>{{post.content_object.content}}</pre>
+<!--                <button class="btn p-2" onclick="mycode('{{post.content_object.content}}','{{post.content_object.id}}');">-->
+<!--                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">-->
+<!--                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>-->
+<!--                    </svg>-->
+<!--                </button>-->
+                   <button class="btn p-2" onclick="deleteBox('{{post.content_object.id}}','code');">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                          <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                   </button>
+           </div>
+           {% elif post.content_object.type == 'image' %}
+           <div class="box">
+             <img src="{{MEDIA_URL}}{{post.content_object.image.url}}" style="width:800px;display:block;" class="image">
+               <button class="btn p-2" onclick="imageModel({{post.content_object.id}});">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil" viewBox="0 0 16 16">
+                      <path d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168zM11.207 2.5 13.5 4.793 14.793 3.5 12.5 1.207zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293zm-9.761 5.175-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325"/>
+                    </svg>
+                </button>
+                   <button class="btn p-2" onclick="deleteBox('{{post.content_object.id}}','image');">
+                       <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash3" viewBox="0 0 16 16">
+                          <path d="M6.5 1h3a.5.5 0 0 1 .5.5v1H6v-1a.5.5 0 0 1 .5-.5M11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3A1.5 1.5 0 0 0 5 1.5v1H1.5a.5.5 0 0 0 0 1h.538l.853 10.66A2 2 0 0 0 4.885 16h6.23a2 2 0 0 0 1.994-1.84l.853-10.66h.538a.5.5 0 0 0 0-1zm1.958 1-.846 10.58a1 1 0 0 1-.997.92h-6.23a1 1 0 0 1-.997-.92L3.042 3.5zm-7.487 1a.5.5 0 0 1 .528.47l.5 8.5a.5.5 0 0 1-.998.06L5 5.03a.5.5 0 0 1 .47-.53Zm5.058 0a.5.5 0 0 1 .47.53l-.5 8.5a.5.5 0 1 1-.998-.06l.5-8.5a.5.5 0 0 1 .528-.47M8 4.5a.5.5 0 0 1 .5.5v8.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 .5-.5"/>
+                        </svg>
+                   </button>
+           </div>
+           {% endif %}
+         {% endfor %}
+
+          <div class="row mt-4">
+              <div class="col-8">
+                    <button type="button" class="btn btn-outline-info" id="subheadingBtn">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-heading" viewBox="0 0 16 16">
+                  <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2z"/>
+                  <path d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5m0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5m0-5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5z"/>
+                </svg>
+            </button>
+           <button type="button" class="btn btn-outline-info"  id="textBtn">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-text-center" viewBox="0 0 16 16">
+                  <path fill-rule="evenodd" d="M4 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5m2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5m-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5"/>
+                </svg>
+           </button>
+            <button type="button" class="btn btn-outline-info" id="imageBtn">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-card-image" viewBox="0 0 16 16">
+                  <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0"/>
+                  <path d="M1.5 2A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2zm13 1a.5.5 0 0 1 .5.5v6l-3.775-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12v.54L1 12.5v-9a.5.5 0 0 1 .5-.5z"/>
+                </svg>
+            </button>
+
+            <button type="button" class="btn btn-outline-info" id="codeBtn">
+               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-code-slash" viewBox="0 0 16 16">
+                  <path d="M10.478 1.647a.5.5 0 1 0-.956-.294l-4 13a.5.5 0 0 0 .956.294zM4.854 4.146a.5.5 0 0 1 0 .708L1.707 8l3.147 3.146a.5.5 0 0 1-.708.708l-3.5-3.5a.5.5 0 0 1 0-.708l3.5-3.5a.5.5 0 0 1 .708 0m6.292 0a.5.5 0 0 0 0 .708L14.293 8l-3.147 3.146a.5.5 0 0 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"/>
+                </svg>
+            </button>
+              </div>
+          </div>
+
+
+            <div class="row mt-2">
+                <form action="{% url 'contentSaving' %}" method="post" id="textForm">
+                    {% csrf_token %}
+                    <textarea class="form-control" name="content"></textarea>
+                    <input type="hidden" name="topic" value="{{topic}}">
+                    <button type="submit" class="btn btn-outline-info btn-sm mt-1">Save</button>
+                </form>
+
+                  <form action="{% url 'subheading' %}" method="post" id="subHeadingForm">
+                      {% csrf_token %}
+                    <input type="text" class="form-control" name="subheading">
+                    <input type="hidden" name="topic" value="{{topic}}">
+                    <button type="submit" class="btn btn-outline-info btn-sm mt-1">Save</button>
+                </form>
+
+                <form action="{% url 'imageSaving' %}" enctype="multipart/form-data" method="post" id="imageForm">
+                   {% csrf_token %}
+                    <div>
+                        <div class="mb-4 d-flex justify-content-center">
+                            <img id="selectedImage" src="https://mdbootstrap.com/img/Photos/Others/placeholder.jpg"
+                            alt="example placeholder" style="width: 300px;" />
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="btn btn-primary btn-rounded">
+                                <label class="form-label text-white m-1" for="customFile1">Choose file</label>
+                                <input type="file" class="form-control d-none" name="image" id="customFile1" onchange="displaySelectedImage(event, 'selectedImage')" />
+                            </div>
+                        </div>
+                    </div>
+                    <input type="hidden" name="topic" value="{{topic}}">
+                    <button type="submit" class="btn btn-outline-info btn-sm mt-1">Save</button>
+                </form>
+
+                  <form action="{% url 'codeSaving' %}" method="post" id="codeForm">
+                     {% csrf_token %}
+                    <textarea class="form-control" name="code"></textarea>
+                    <input type="hidden" name="topic" value="{{topic}}">
+                    <button type="submit" class="btn btn-outline-info btn-sm mt-1">Save</button>
+                </form>
+
+            </div>
+
+       </div>
+    </div>
+  </div>
+<!-- Sub heading Modal -->
+<div class="modal fade" id="headingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+   <form action="{% url 'updateSubheading' %}" method="post">
+       {% csrf_token %}
+    <div class="modal-content">
+      <div class="modal-body">
+            <input type="text" class="form-control" id="subheading" name="subheading">
+            <input type="hidden" name="id" value="" id="subheading_id">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+   </form>
+    </div>
+  </div>
+
+
+<!-- Content Modal -->
+<div class="modal fade " id="contentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+   <form action="{% url 'updateContent' %}" method="post">
+       {% csrf_token %}
+    <div class="modal-content">
+      <div class="modal-body">
+          <textarea class="form-control" id="content" name="content"> </textarea>
+            <input type="hidden" name="id" id="content_id">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+   </form>
+    </div>
+  </div>
+
+
+
+<!-- Code Modal -->
+<div class="modal fade " id="codeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+   <form action="#" method="post">
+       {% csrf_token %}
+    <div class="modal-content">
+      <div class="modal-body">
+          <textarea class="form-control" id="mycode" name="code"> </textarea>
+            <input type="hidden" name="id" id="code_id">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+   </form>
+    </div>
+  </div>
+
+
+<!-- Image Modal -->
+<div class="modal fade " id="imageModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+   <form action="{% url 'imageUpdating' %}" method="post" enctype="multipart/form-data">
+       {% csrf_token %}
+    <div class="modal-content">
+      <div class="modal-body">
+          {% csrf_token %}
+                    <div>
+                        <div class="d-flex justify-content-center">
+                            <div class="btn btn-primary btn-rounded">
+                                <label class="form-label text-white m-1" for="customFile2">Choose file</label>
+                                <input type="file" class="form-control d-none" name="image" id="customFile2" onchange="displaySelectedImage2(event, 'selectedImage2')" />
+                            </div>
+                        </div>
+                    </div>
+              <input type="hidden" name="id" id="image_id">
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Save</button>
+      </div>
+    </div>
+   </form>
+    </div>
+  </div>
+
+{% endblock content %}
+{% block script %}
+<script>
+     $(document).ready(function(){
+       $('#textForm').slideUp(2);
+       $('#subHeadingForm').slideUp(2);
+       $('#imageForm').slideUp(2);
+       $('#codeForm').slideUp(2);
+
+      });
+
+      $('#textBtn').click(function(){
+       $('#subHeadingForm').slideUp(2);
+       $('#imageForm').slideUp(2);
+       $('#codeForm').slideUp(2);
+        $('#textForm').toggle(500);
+      });
+
+      $('#subheadingBtn').click(function(){
+          $('#textForm').slideUp(2);
+          $('#imageForm').slideUp(2);
+          $('#codeForm').slideUp(2);
+          $('#subHeadingForm').toggle(500);
+      });
+
+      $('#imageBtn').click(function(){
+        $('#textForm').slideUp(2);
+        $('#subHeadingForm').slideUp(2);
+        $('#codeForm').slideUp(2);
+        $('#imageForm').toggle(500);
+      });
+
+        $('#codeBtn').click(function(){
+          $('#textForm').slideUp(2);
+          $('#subHeadingForm').slideUp(2);
+          $('#imageForm').slideUp(2);
+          $('#codeForm').toggle(500);
+      });
+
+   function displaySelectedImage(event, elementId) {
+    const selectedImage = document.getElementById(elementId);
+    const fileInput = event.target;
+
+    if (fileInput.files && fileInput.files[0]) {
+        const reader = new FileReader();
+
+        reader.onload = function(e) {
+            selectedImage.src = e.target.result;
+        };
+
+        reader.readAsDataURL(fileInput.files[0]);
+    }
+}
+
+
+$('.box').mouseenter(function(){
+   $(this).addClass('mybox');
+   $(this).find('button').addClass("btnShow");
+});
+$('.box').mouseleave(function(){
+   $(this).removeClass('mybox');
+   $(this).find('button').removeClass("btnShow");
+
+});
+
+function subheading(content,id){
+  $('#subheading').val(content);
+  $('#subheading_id').val(id);
+  $('#headingModal').modal('show');
+}
+
+function content(c,id){
+  $('#content').val(c);
+  $('#content_id').val(id);
+  $('#contentModal').modal('show');
+}
+
+
+function imageModel(id){
+  $('#image_id').val(id);
+  $('#imageModel').modal('show');
+}
+
+function deleteBox(id,co){
+   c = confirm("Are you sure ?");
+   if(c){
+      window.location.href = "/remove/"+id+"/"+co;
+   }
+}
+</script>
+
+
+{% endblock %}
+
+

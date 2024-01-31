@@ -1,0 +1,19 @@
+{% extends "_base.html" %}
+{% block title %} Home {% endblock %}
+{% block content %}
+  <div class="container">
+    <div class="row justify-content-md-center">
+       <div class="col-8">
+          {% for obj  in courses %}
+           <div class="card" style="width: 18rem;">
+              <img src="{{MEDIA_URL}}{{obj.courseIcon.url}}" class="card-img-top" alt="...">
+              <div class="card-body text-center">
+                <h5 class="card-title">{{obj}}</h5>
+                <a href="{% url 'chapterList' obj.id %}" class="btn btn-primary center">Details</a>
+              </div>
+            </div>`
+          {% endfor %}
+       </div>
+    </div>
+  </div>
+{% endblock content %}

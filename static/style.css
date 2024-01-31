@@ -1,0 +1,10 @@
+.mybox{
+  border:1px solid #ADD8E6;
+  padding:5px;
+}
+.box button{
+ display:none;
+}
+.btnShow{
+  display:inline !important;
+}
